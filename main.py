@@ -12,7 +12,12 @@ df.show()
 
 df = transform.clean_text(df)
 
+df = transform.handle_missing_values(df)
+
 print("=== AFTER TEXT CLEANING ===")
 df.show()
+
+print("=== NULL VALUES ===")
+transform.check_nulls(df)
 
 extract.stop()

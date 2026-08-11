@@ -1,26 +1,43 @@
-from pyspark.sql.functions import col, trim, lower, upper, initcap
+from pyspark.sql.functions import col, trim, upper, initcap, sum
 
 
 class Transform:
 
     def clean_text(self, df):
 
-        # Remove spaces from the beginning and end of text
         df = df.withColumn(
             "Name",
             trim(col("Name"))
         )
 
-        # Standardize gender
         df = df.withColumn(
             "Gender",
             upper(trim(col("Gender")))
         )
 
-        # Standardize city
         df = df.withColumn(
             "City",
             initcap(trim(col("City")))
         )
+
+        return df
+
+    def check_nulls(self, df):
+
+        null_counts = df.select([
+            sum(
+                col(c).isNull().cast("int")
+            ).alias(c)
+            for c in df.columns
+        ])
+
+        null_counts.show()
+
+        return df
+
+    def handle_missing_values(self, df):
+
+        # Remove records where customer name is missing
+        df = df.dropna(subset=["Name"])
 
         return df
