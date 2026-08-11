@@ -1,20 +1,18 @@
 from src.extract import Extract
+from src.transform import Transform
 
 
-# Create the Extract object
 extract = Extract()
+transform = Transform()
 
-# Read the raw customer data
 df = extract.read_csv("data/raw/customers.csv")
 
-# Display basic information
-print("Rows:", df.count())
-
-print("\nSchema:")
-df.printSchema()
-
-print("\nRaw Customer Data:")
+print("=== BEFORE CLEANING ===")
 df.show()
 
-# Stop Spark
+df = transform.clean_text(df)
+
+print("=== AFTER TEXT CLEANING ===")
+df.show()
+
 extract.stop()
