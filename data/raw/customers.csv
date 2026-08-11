@@ -1,0 +1,12 @@
+Customer_ID,Name,Age,Gender,City,Income
+C001, John Doe ,25,Male,Lagos,250000
+C002,Jane Smith,17,Female, Abuja,180000
+C003,JOHN DOE,25,male,Lagos,250000
+C004,,32,Female,Ibadan,
+C005,Michael,abc,Male,LAGOS,300000
+C006,Sarah,29,FEMALE,Port Harcourt,220000
+C007,David,45,Male,lagos,-50000
+C008,Grace,150,Female,Abuja,350000
+C009,Peter,38,Male,Kano,400000
+C010, Linda ,27,female, ibadan ,280000
+C010, Linda ,27,female, ibadan ,280000
