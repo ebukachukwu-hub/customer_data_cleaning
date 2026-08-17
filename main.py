@@ -12,12 +12,22 @@ df.show()
 
 df = transform.clean_text(df)
 
-df = transform.handle_missing_values(df)
-
 print("=== AFTER TEXT CLEANING ===")
 df.show()
 
-print("=== NULL VALUES ===")
-transform.check_nulls(df)
+df = transform.handle_missing_values(df)
+
+print("=== AFTER HANDLING MISSING VALUES ===")
+df.show()
+
+df = transform.convert_data_types(df)
+
+print("=== AFTER CONVERTING DATA TYPES ===")
+df.show()
+
+df = transform.validate_data(df)
+
+print("=== AFTER DATA VALIDATION ===")
+df.show()
 
 extract.stop()

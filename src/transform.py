@@ -41,3 +41,30 @@ class Transform:
         df = df.dropna(subset=["Name"])
 
         return df
+
+    def convert_data_types(self, df):
+
+    # Convert Age from string to integer.
+    # Invalid values such as "abc" become NULL.
+        df = df.withColumn(
+        "Age",
+        df["Age"].try_cast("integer")
+    )
+
+        return df
+
+    def validate_data(self, df):
+
+    # Remove invalid or missing ages
+        df = df.filter(
+            (col("Age").isNotNull()) &
+            (col("Age") >= 18) &
+            (col("Age") <= 100)
+        )
+
+    # Income must not be negative
+        df = df.filter(
+            col("Income") >= 0
+        )
+
+        return df
