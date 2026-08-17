@@ -1,10 +1,12 @@
 from src.extract import Extract
 from src.transform import Transform
 from src.load import Load
+from src.report import Report
 
 extract = Extract()
 transform = Transform()
 load = Load()
+report = Report()
 
 df = extract.read_csv("data/raw/customers.csv")
 
@@ -45,6 +47,16 @@ df = transform.data_quality_check(df)
 
 print("\n=== FINAL CLEAN DATA ===")
 df.show()
+
+print("\n" + "=" * 50)
+print("CUSTOMER DATA REPORT")
+print("=" * 50)
+
+report.total_customers(df)
+report.average_age(df)
+report.average_income(df)
+report.customers_by_city(df)
+report.customers_by_gender(df)
 
 print("\n=== SAVING CLEAN DATA ===")
 
