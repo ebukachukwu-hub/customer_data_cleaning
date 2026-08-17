@@ -68,3 +68,10 @@ class Transform:
         )
 
         return df
+
+    def remove_duplicates(self, df):
+        # Remove duplicate records based on all columns
+
+        df = df.dropDuplicates()
+
+        return df

@@ -30,4 +30,9 @@ df = transform.validate_data(df)
 print("=== AFTER DATA VALIDATION ===")
 df.show()
 
+df = transform.remove_duplicates(df)
+
+print("=== AFTER REMOVING DUPLICATES ===")
+df.show()
+
 extract.stop()
