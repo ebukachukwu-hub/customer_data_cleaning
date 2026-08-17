@@ -35,4 +35,9 @@ df = transform.remove_duplicates(df)
 print("=== AFTER REMOVING DUPLICATES ===")
 df.show()
 
+df = transform.detect_income_outliers(df)
+
+print("=== AFTER DETECTING INCOME OUTLIERS ===")
+df.show()
+
 extract.stop()

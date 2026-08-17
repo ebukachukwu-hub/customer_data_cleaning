@@ -75,3 +75,40 @@ class Transform:
         df = df.dropDuplicates()
 
         return df
+
+    def detect_income_outliers(self, df):
+
+        # Get the 25th and 75th percentiles
+        quantiles = df.approxQuantile(
+            "Income",
+            [0.25, 0.75],
+            0.0
+        )
+
+        q1 = quantiles[0]
+        q3 = quantiles[1]
+
+        # Calculate the Interquartile Range
+        iqr = q3 - q1
+
+        # Calculate the boundaries
+        lower_bound = q1 - (1.5 * iqr)
+        upper_bound = q3 + (1.5 * iqr)
+
+        print("\n=== INCOME OUTLIER DETECTION ===")
+        print(f"Q1: {q1}")
+        print(f"Q3: {q3}")
+        print(f"IQR: {iqr}")
+        print(f"Lower Bound: {lower_bound}")
+        print(f"Upper Bound: {upper_bound}")
+
+        # Show potential outliers
+        outliers = df.filter(
+            (col("Income") < lower_bound) |
+            (col("Income") > upper_bound)
+        )
+
+        print("\nPotential Income Outliers:")
+        outliers.show()
+
+        return df
