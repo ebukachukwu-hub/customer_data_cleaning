@@ -1,9 +1,10 @@
 from src.extract import Extract
 from src.transform import Transform
-
+from src.load import Load
 
 extract = Extract()
 transform = Transform()
+load = Load()
 
 df = extract.read_csv("data/raw/customers.csv")
 
@@ -44,5 +45,12 @@ df = transform.data_quality_check(df)
 
 print("\n=== FINAL CLEAN DATA ===")
 df.show()
+
+print("\n=== SAVING CLEAN DATA ===")
+
+load.save_csv(df,
+               "data/clean/customers_clean.csv")
+load.save_parquet(df,
+                   "data/clean/customers_clean.parquet")
 
 extract.stop()
