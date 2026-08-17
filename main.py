@@ -40,4 +40,9 @@ df = transform.detect_income_outliers(df)
 print("=== AFTER DETECTING INCOME OUTLIERS ===")
 df.show()
 
+df = transform.data_quality_check(df)
+
+print("\n=== FINAL CLEAN DATA ===")
+df.show()
+
 extract.stop()

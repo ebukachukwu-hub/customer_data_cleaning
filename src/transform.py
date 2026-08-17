@@ -112,3 +112,49 @@ class Transform:
         outliers.show()
 
         return df
+
+    def data_quality_check(self, df):
+
+        print("\n=== DATA QUALITY CHECK ===")
+
+        # Check for null values
+        print("\nNull Values:")
+
+        for column in df.columns:
+            null_count = df.filter(
+                col(column).isNull()
+            ).count()
+
+            print(f"{column}: {null_count}")
+
+        # Check for duplicate Customer IDs
+        duplicate_ids = (
+            df.groupBy("Customer_ID")
+            .count()
+            .filter(col("count") > 1)
+        )
+
+        print("\nDuplicate Customer IDs:")
+        duplicate_ids.show()
+
+        # Check for invalid ages
+        invalid_ages = df.filter(
+            (col("Age") < 18) |
+            (col("Age") > 100)
+        )
+
+        print("\nInvalid Ages:")
+        invalid_ages.show()
+
+        # Check for negative incomes
+        negative_income = df.filter(
+            col("Income") < 0
+        )
+
+        print("\nNegative Incomes:")
+        negative_income.show()
+
+        # Final record count
+        print(f"\nFinal Record Count: {df.count()}")
+
+        return df
